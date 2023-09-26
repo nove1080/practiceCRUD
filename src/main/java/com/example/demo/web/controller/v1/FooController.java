@@ -10,6 +10,7 @@ import com.example.demo.web.support.converter.FooControllerConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class FooController {
 	private final FooControllerConverter fooControllerConverter;
 
 	@PostMapping()
-	public ApiResponse<ApiResponse.SuccessBody<FooResponse>> foo(FooRequest request) {
+	public ApiResponse<ApiResponse.SuccessBody<FooResponse>> foo(@RequestBody FooRequest request) {
 		FooDomainResponse response = fooService.execute(fooControllerConverter.from(request));
 		return ApiResponseGenerator.success(fooControllerConverter.to(response), HttpStatus.OK);
 	}

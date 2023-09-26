@@ -12,6 +12,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder(toBuilder = true)
 public class Foo {
-
 	private String name;
+
 }

@@ -5,3 +5,7 @@ spring:
     include:
       - flyway
       - mysql
+
+jwt:
+  secret: VlwEyVBsYt9V7zq57TejMnVUyzblYcfPQye08f7MGVA9XkHa
+  token-validity-in-milliseconds: 1800000

@@ -13,4 +13,8 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 public class FooResponse {
 	private String name;
+
+	public FooResponse build() {
+		return new FooResponse(name);
+	}
 }

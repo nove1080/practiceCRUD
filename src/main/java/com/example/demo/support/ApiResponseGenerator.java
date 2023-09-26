@@ -56,4 +56,12 @@ public class ApiResponseGenerator {
 			final String message, final HttpStatus status) {
 		return new ApiResponse<>(new ApiResponse.FailureBody(message), status);
 	}
+
+	public static ApiResponse<ApiResponse.SimpleSuccessBody> simpleResponse(final HttpStatus status) {
+		return new ApiResponse<>(
+				new ApiResponse.SimpleSuccessBody(
+						MessageCode.SUCCESS.getValue(),
+						MessageCode.SUCCESS.getCode()
+				), status);
+	}
 }

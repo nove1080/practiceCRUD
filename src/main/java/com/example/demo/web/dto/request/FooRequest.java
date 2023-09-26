@@ -1,10 +1,6 @@
 package com.example.demo.web.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
@@ -14,4 +10,8 @@ import lombok.ToString;
 public class FooRequest {
 
 	private String name;
+	private Integer age;
+	private String email;
+	private String password;
+
 }

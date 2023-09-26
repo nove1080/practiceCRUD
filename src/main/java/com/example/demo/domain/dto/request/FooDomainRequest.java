@@ -14,4 +14,5 @@ import lombok.ToString;
 public class FooDomainRequest {
 
 	private String name;
+
 }

@@ -1,4 +1,4 @@
-package com.example.demo.authentication.filter;
+package com.example.demo.authentication;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
@@ -60,7 +60,6 @@ public class JwtTokenProvider {
 
         log.info("generate token");
         return TokenInfo.builder()
-                .grantType("Bearer")
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .build();
@@ -68,9 +67,10 @@ public class JwtTokenProvider {
 
     // JWT 토큰을 복호화하여 토큰에 들어있는 정보를 꺼내는 메서드
     public Authentication getAuthentication(String accessToken) {
+        log.info("accessToken={}", accessToken);
         // 토큰 복호화
         Claims claims = parseClaims(accessToken);
-
+        log.info("claims={}", claims);
         if (claims.get("auth") == null) {
             throw new RuntimeException("권한 정보가 없는 토큰입니다.");
         }
