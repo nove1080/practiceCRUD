@@ -14,5 +14,4 @@ import lombok.ToString;
 public class FooDomainResponse {
 
 	private String name;
-
 }

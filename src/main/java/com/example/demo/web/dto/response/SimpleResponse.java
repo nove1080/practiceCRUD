@@ -8,6 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class SimpleResponse {
-    private String message;
-    private String code;
+	private String message;
+	private String code;
 }

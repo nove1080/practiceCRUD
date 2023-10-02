@@ -14,22 +14,23 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+	private final UserRepository userRepository;
+	private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        return userRepository.findById(Long.parseLong(id))
-                .map(this::createUserDetails)
-                .orElseThrow(() -> new UsernameNotFoundException("해당하는 유저를 찾을 수 없습니다."));
-    }
+	@Override
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+		return userRepository
+				.findById(Long.parseLong(id))
+				.map(this::createUserDetails)
+				.orElseThrow(() -> new UsernameNotFoundException("해당하는 유저를 찾을 수 없습니다."));
+	}
 
-    // 해당하는 User 의 데이터가 존재한다면 UserDetails 객체로 만들어서 리턴
-    private UserDetails createUserDetails(UserEntity user) {
-        return User.builder()
-                .username(user.getUsername())
-                .password(passwordEncoder.encode(user.getPassword()))
-                .roles(user.getRoles().toArray(new String[0]))
-                .build();
-    }
+	// 해당하는 User 의 데이터가 존재한다면 UserDetails 객체로 만들어서 리턴
+	private UserDetails createUserDetails(UserEntity user) {
+		return User.builder()
+				.username(user.getUsername())
+				.password(passwordEncoder.encode(user.getPassword()))
+				.roles(user.getRoles().toArray(new String[0]))
+				.build();
+	}
 }

@@ -9,6 +9,6 @@ import lombok.Getter;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 public class UserResponse {
-    private Long id;
-    private TokenInfo authToken;
+	private Long id;
+	private TokenInfo authToken;
 }

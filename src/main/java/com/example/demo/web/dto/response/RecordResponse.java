@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder(toBuilder = true)
 public class RecordResponse {
-    private Long rid;
-    private String title;
-    private String content;
+	private Long rid;
+	private String title;
+	private String content;
 }

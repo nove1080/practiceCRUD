@@ -1,11 +1,10 @@
 package com.example.demo.repository.entity;
 
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
@@ -14,21 +13,22 @@ import javax.persistence.*;
 @Builder(toBuilder = true)
 public class RecordEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rid;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long rid;
 
-//    @ManyToOne
-//    @JoinColumn(name="userId")
-//    private UserEntity userEntity;
-    private String title;
-    private String content;
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private UserEntity userEntity;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	private String title;
+	private String content;
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

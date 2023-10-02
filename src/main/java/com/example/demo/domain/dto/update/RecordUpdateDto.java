@@ -8,6 +8,6 @@ import lombok.Getter;
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class RecordUpdateDto {
-    private String title;
-    private String content;
+	private String title;
+	private String content;
 }

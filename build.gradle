@@ -27,8 +27,8 @@ plugins {
     id 'com.epages.restdocs-api-spec' version "${epagesRestDocsApiSpecVersion}"
     id "org.sonarqube" version "${sonarqubeVersion}"
     id 'jacoco'
-}
 
+}
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'

@@ -1,18 +1,16 @@
 package com.example.demo.repository.entity;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -30,6 +28,7 @@ public class UserEntity implements UserDetails {
 
 	@Column(unique = true)
 	private String name;
+
 	private Integer age;
 	private String email;
 	private String password;
@@ -42,13 +41,15 @@ public class UserEntity implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return this.roles.stream()
-				.map(SimpleGrantedAuthority::new)
-				.collect(Collectors.toList());
+		return this.roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 	}
 
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public boolean equals(UserEntity another) {
+		return id == another.getId();
 	}
 
 	@Override

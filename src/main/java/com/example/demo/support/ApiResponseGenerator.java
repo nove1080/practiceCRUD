@@ -60,8 +60,7 @@ public class ApiResponseGenerator {
 	public static ApiResponse<ApiResponse.SimpleSuccessBody> simpleResponse(final HttpStatus status) {
 		return new ApiResponse<>(
 				new ApiResponse.SimpleSuccessBody(
-						MessageCode.SUCCESS.getValue(),
-						MessageCode.SUCCESS.getCode()
-				), status);
+						MessageCode.SUCCESS.getValue(), MessageCode.SUCCESS.getCode()),
+				status);
 	}
 }

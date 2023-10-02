@@ -13,5 +13,4 @@ public class FooRequest {
 	private Integer age;
 	private String email;
 	private String password;
-
 }

@@ -13,5 +13,4 @@ import lombok.ToString;
 @Builder(toBuilder = true)
 public class Foo {
 	private String name;
-
 }
