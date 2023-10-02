@@ -6,16 +6,10 @@ import com.example.demo.repository.entity.RecordEntity;
 import com.example.demo.support.ApiResponse;
 import com.example.demo.support.ApiResponseGenerator;
 import com.example.demo.web.dto.request.RecordRequest;
-import com.example.demo.web.dto.response.DataResponse;
 import com.example.demo.web.dto.response.RecordResponse;
-import com.example.demo.web.dto.response.SimpleResponse;
-import com.sun.tools.javac.util.DefinedBy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -31,7 +25,7 @@ public class RecordController {
     }
 
     @GetMapping("/record")
-    public ApiResponse<ApiResponse.SuccessBody<RecordResponse>> getRecord(Long id) {
+    public ApiResponse<ApiResponse.SuccessBody<RecordResponse>> getRecord(@RequestParam Long id) {
         RecordEntity record = recordService.findRecord(id);
         RecordResponse data = getRecordResponse(id, record);
         return ApiResponseGenerator.success(data, HttpStatus.OK);

@@ -12,14 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +33,6 @@ public class UserService {
 
     @Transactional
     public TokenInfo login(Long id, String password) {
-        log.info("login");
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(id.toString(), password);
 
         // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
@@ -53,8 +50,17 @@ public class UserService {
         return userEntity.getId();
     }
 
-    public Optional<UserEntity> findUser(String name) {
-        return userRepository.findByName(name);
+    public void removeUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public List<UserEntity> findAllUser() {
+        return userRepository.findAll();
+    }
+
+    public UserEntity findUserByName(String name) {
+        return userRepository.findByName(name)
+                .orElseThrow(() -> new UsernameNotFoundException("해당 유저를 찾을 수 없습니다."));
     }
 
     public List<String> generateRoles(UserRole... roles) {

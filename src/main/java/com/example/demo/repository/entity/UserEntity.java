@@ -1,6 +1,9 @@
 package com.example.demo.repository.entity;
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +19,8 @@ import java.util.stream.Collectors;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Where(clause = "is_deleted = false")
+@SQLDelete(sql = "UPDATE user_entity SET is_deleted = true WHERE id = ?")
 @Builder(toBuilder = true)
 public class UserEntity implements UserDetails {
 
@@ -29,6 +34,8 @@ public class UserEntity implements UserDetails {
 	private String email;
 	private String password;
 
+	private boolean isDeleted = Boolean.FALSE;
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@Builder.Default
 	private List<String> roles = new ArrayList<>();
@@ -38,6 +45,10 @@ public class UserEntity implements UserDetails {
 		return this.roles.stream()
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toList());
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 	@Override
